@@ -1,3 +1,9 @@
+bin/
+
+*.jpg
+*.png
+*.jpeg
+
 # Compiled class file
 *.class
 
