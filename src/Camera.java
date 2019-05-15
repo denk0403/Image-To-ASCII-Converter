@@ -1,9 +1,9 @@
 
-
 import java.awt.geom.AffineTransform;
 
 /**
- *  Represents a Camera object
+ * Represents a Camera object
+ * 
  * @author Dennis Kats
  *
  */
@@ -14,19 +14,20 @@ public class Camera {
 	private double scale;
 
 	/**
-	 *  Creates a camera with the given x/y translations, and scale
+	 * Creates a camera with the given x/y translations, and scale
+	 * 
 	 * @param translateX The translation in the x-direction
 	 * @param translateY The translation in the y-direction
-	 * @param scale The scale of the at which the camera is looking at
+	 * @param scale      The scale of the at which the camera is looking at
 	 */
 	public Camera(double translateX, double translateY, double scale) {
 		this.translateX = translateX;
 		this.translateY = translateY;
 		this.scale = scale;
 	}
-	
+
 	/**
-	 *  Creates a default camera, positioned at 0, and with a scale of 1
+	 * Creates a default camera, positioned at 0, and with a scale of 1
 	 */
 	public Camera() {
 		this.translateX = 0;
@@ -35,7 +36,8 @@ public class Camera {
 	}
 
 	/**
-	 *  Translates this camera by the given dx and dy
+	 * Translates this camera by the given dx and dy
+	 * 
 	 * @param dx The change in the x-direction
 	 * @param dy The change in the y-direction
 	 */
@@ -46,6 +48,7 @@ public class Camera {
 
 	/**
 	 * Scales this camera by the given factor
+	 * 
 	 * @param The factor to scale the camera by
 	 */
 	public void scale(double factor) {
@@ -53,10 +56,11 @@ public class Camera {
 	}
 
 	/**
-	 *  Scales this camera by the given factor around the given x and y coordinate
+	 * Scales this camera by the given factor around the given x and y coordinate
+	 * 
 	 * @param factor The factor to scale the camera by
-	 * @param x The x-coordinate to scale relative to
-	 * @param y The y-coordinate to scale relative to
+	 * @param x      The x-coordinate to scale relative to
+	 * @param y      The y-coordinate to scale relative to
 	 */
 	public void scaleAboutPoint(double factor, double x, double y) {
 		double xDisp = (x - this.translateX);
@@ -69,7 +73,8 @@ public class Camera {
 	}
 
 	/**
-	 *  Translates this camera to the given point
+	 * Translates this camera to the given point
+	 * 
 	 * @param x The x-coordinate to move the camera to
 	 * @param y The y-coordinate to move the camera to
 	 */
@@ -103,10 +108,9 @@ public class Camera {
 	 * @return Returns the AffineTransform represented by this Camera
 	 */
 	public AffineTransform getTransform() {
-		return new AffineTransform(new double[] { this.getScale(), 0, 0,
-				-this.getScale(), this.getTranslateX(), this.getTranslateY()});
+		return new AffineTransform(new double[] { this.getScale(), 0, 0, -this.getScale(),
+				this.getTranslateX(), this.getTranslateY() });
 	}
-
 
 	@Override
 	public String toString() {

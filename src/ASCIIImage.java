@@ -12,21 +12,21 @@ public class ASCIIImage implements ImageObserver {
 
 	BufferedImage img;
 	ArrayList<String> conversion;
-	
+
 	public ASCIIImage(BufferedImage img) {
 		this.img = img;
 		this.conversion = new ArrayList<>();
 		this.convert();
 	}
-	
+
 	public int getWidth() {
 		return this.conversion.get(0).length();
 	}
-	
+
 	public int getHeight() {
 		return this.conversion.size();
 	}
-	
+
 	private void convert() {
 		this.resizeIfNecessary();
 		String resultStr = "";
@@ -40,21 +40,25 @@ public class ASCIIImage implements ImageObserver {
 			resultStr = "";
 		}
 	}
-	
+
 	private void resizeIfNecessary() {
-		BufferedImage newImg = new BufferedImage(this.img.getWidth(), this.img.getHeight(), this.img.getType());
+		BufferedImage newImg = new BufferedImage(this.img.getWidth(), this.img.getHeight(),
+				this.img.getType());
 		if (newImg.getWidth() > 1500 || newImg.getHeight() > 900) {
 			if (newImg.getWidth() > 1500) {
-				newImg = new BufferedImage(1500, (int)(newImg.getHeight() / (newImg.getWidth() / 1500.0)), this.img.getType());
+				newImg = new BufferedImage(1500,
+						(int) (newImg.getHeight() / (newImg.getWidth() / 1500.0)),
+						this.img.getType());
 			}
 			if (newImg.getHeight() > 900) {
-				newImg = new BufferedImage((int)(newImg.getWidth() / (newImg.getHeight() / 900.0)), 900, this.img.getType());
+				newImg = new BufferedImage((int) (newImg.getWidth() / (newImg.getHeight() / 900.0)),
+						900, this.img.getType());
 			}
-			Graphics2D g2 = (Graphics2D)newImg.getGraphics();
+			Graphics2D g2 = (Graphics2D) newImg.getGraphics();
 			g2.drawImage(this.img, 0, 0, newImg.getWidth(), newImg.getHeight(), null);
 			this.img = newImg;
 		}
-		
+
 	}
 
 	private String getEnergyChar(double brightness) {
@@ -106,11 +110,12 @@ public class ASCIIImage implements ImageObserver {
 	public List<String> getASCII() {
 		return this.conversion;
 	}
-	
+
 	public void paint(Graphics2D g2) {
 		int yLoc = 0;
 		g2.setBackground(Color.WHITE);
-		g2.clearRect(0, 0, this.getWidth() * this.getFontSize(), this.getHeight() * this.getFontSize());
+		g2.clearRect(0, 0, this.getWidth() * this.getFontSize(),
+				this.getHeight() * this.getFontSize());
 		g2.setColor(Color.BLACK);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS,
@@ -127,7 +132,7 @@ public class ASCIIImage implements ImageObserver {
 			yLoc += this.getFontSize();
 		}
 	}
-	
+
 	public int getFontSize() {
 		return 12;
 	}

@@ -14,7 +14,9 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
@@ -154,13 +156,13 @@ public class DisplayASCII extends JPanel {
 						img.getHeight() * img.getFontSize(), BufferedImage.TYPE_BYTE_GRAY);
 				img.paint((Graphics2D) awtImage.getGraphics());
 
-				JFileChooser filechooser = new JFileChooser();
+				JFileChooser fileChooser = new JFileChooser();
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg",
 						"png");
-				filechooser.setFileFilter(filter);
-				int result = filechooser.showSaveDialog(null);
+				fileChooser.setFileFilter(filter);
+				int result = fileChooser.showSaveDialog(null);
 				if (result == JFileChooser.APPROVE_OPTION) {
-					File saveFile = filechooser.getSelectedFile();
+					File saveFile = fileChooser.getSelectedFile();
 					try {
 						ImageIO.write(awtImage, "png", saveFile);
 					} catch (IOException e1) {
@@ -170,6 +172,35 @@ public class DisplayASCII extends JPanel {
 			}
 		});
 		rightClick.add(save);
+		JMenuItem saveText = new JMenuItem("Save to Text File");
+		saveText.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				BufferedImage awtImage = new BufferedImage(img.getWidth() * img.getFontSize(),
+						img.getHeight() * img.getFontSize(), BufferedImage.TYPE_BYTE_GRAY);
+				img.paint((Graphics2D) awtImage.getGraphics());
+
+				JFileChooser fileChooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
+				fileChooser.setFileFilter(filter);
+				int result = fileChooser.showSaveDialog(null);
+				if (result == JFileChooser.APPROVE_OPTION) {
+					File saveFile = fileChooser.getSelectedFile();
+					try {
+						PrintWriter writer = new PrintWriter(saveFile);
+						for (String str : img.getASCII()) {
+							writer.write(str + "\n");
+						}
+						writer.close();
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		rightClick.add(saveText);
 		rightClick.setInheritsPopupMenu(true);
 		this.setComponentPopupMenu(rightClick);
 
@@ -206,12 +237,8 @@ public class DisplayASCII extends JPanel {
 	public void resetCamera() {
 
 		this.camera = new Camera(
-				(this.getWidth()
-						- (this.img.getWidth() * this.img.getFontSize() / 12.0))
-						/ 2,
-				(this.getHeight()
-						- (this.img.getHeight() * this.img.getFontSize() / 12.0))
-						/ 2,
+				(this.getWidth() - (this.img.getWidth() * this.img.getFontSize() / 12.0)) / 2,
+				(this.getHeight() - (this.img.getHeight() * this.img.getFontSize() / 12.0)) / 2,
 				1 / 12.0);
 	}
 
