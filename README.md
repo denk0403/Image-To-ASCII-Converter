@@ -5,9 +5,7 @@ A program that converts a given image into ASCII text. Upon starting the program
   - [x] Convert any JPG or PNG on your computer into ASCII text.
   - [x] Easily zoom, pan, and recenter the image of the text.
   - [x] Right-click and choose between copying the entire text to the clipboard, saving the text as a high-quality PNG, or saving it to a text file.
-  
-&nbsp;
-
+ 
 *Here is a penguin I tested it with.*
  ![image](https://user-images.githubusercontent.com/3473945/57742264-79a80980-768e-11e9-92c4-19469290b586.png)
  
