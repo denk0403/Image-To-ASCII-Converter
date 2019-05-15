@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		JFileChooser fileChooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg", "png");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg", "png", "jpeg");
 		fileChooser.setFileFilter(filter);
 		fileChooser.setMultiSelectionEnabled(false);
 		fileChooser.setFileHidingEnabled(true);

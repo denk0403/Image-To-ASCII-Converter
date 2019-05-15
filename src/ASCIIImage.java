@@ -29,6 +29,8 @@ public class ASCIIImage implements ImageObserver {
 
 	private void convert() {
 		this.resizeIfNecessary();
+		System.out.println(this.img.getWidth());
+		System.out.println(this.img.getHeight());
 		String resultStr = "";
 		for (int pixelRow = 0; pixelRow < this.img.getHeight(this); pixelRow += 1) {
 			for (int pixelCol = 0; pixelCol < this.img.getWidth(this); pixelCol += 1) {
@@ -65,33 +67,33 @@ public class ASCIIImage implements ImageObserver {
 		// map : "MNHQ$OC?7>!:-;. "
 		double energy = 255 - brightness;
 		if (energy > 240) {
-			return "M";
-		} else if (energy > 224) {
 			return "N";
+		} else if (energy > 224) {
+			return "M";
 		} else if (energy > 208) {
-			return "H";
-		} else if (energy > 192) {
 			return "Q";
+		} else if (energy > 192) {
+			return "H";
 		} else if (energy > 176) {
-			return "$";
-		} else if (energy > 160) {
 			return "O";
+		} else if (energy > 160) {
+			return "$";
 		} else if (energy > 144) {
 			return "C";
 		} else if (energy > 128) {
-			return "?";
-		} else if (energy > 112) {
 			return "7";
+		} else if (energy > 112) {
+			return "?";
 		} else if (energy > 96) {
 			return ">";
 		} else if (energy > 80) {
-			return "!";
-		} else if (energy > 64) {
 			return ";";
+		} else if (energy > 64) {
+			return "!";
 		} else if (energy > 48) {
-			return "-";
-		} else if (energy > 32) {
 			return ":";
+		} else if (energy > 32) {
+			return "-";
 		} else if (energy > 16) {
 			return ".";
 		} else {
