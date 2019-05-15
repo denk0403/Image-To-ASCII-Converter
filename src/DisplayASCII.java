@@ -63,7 +63,6 @@ public class DisplayASCII extends JPanel {
 						camera.scaleAboutPoint(1 / 0.95, e.getX(), e.getY());
 					}
 				}
-				System.out.println(camera.getScale());
 				DisplayASCII.this.repaint();
 			}
 		});
