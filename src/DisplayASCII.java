@@ -27,7 +27,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class DisplayASCII extends JPanel {
 
 	ASCIIImage img;
-	Camera camera = new Camera(0, 0, 1 / 12.0);
+	Camera camera = new Camera();
 
 	public DisplayASCII(ASCIIImage asciiImage) {
 		this.img = asciiImage;
@@ -36,10 +36,11 @@ public class DisplayASCII extends JPanel {
 
 	private void initComponents() {
 		JFrame frame = new JFrame("ASCII Converter");
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setPreferredSize(new Dimension(
 				900 * this.img.getWidth() / Math.max(this.img.getWidth(), this.img.getHeight()),
 				900 * this.img.getHeight() / Math.max(this.img.getWidth(), this.img.getHeight())));
+		frame.setMinimumSize(frame.getPreferredSize());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		///////////////
 
@@ -176,6 +177,9 @@ public class DisplayASCII extends JPanel {
 		frame.add(this);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
+
+		this.resetCamera();
+
 		frame.setVisible(true);
 	}
 
@@ -200,7 +204,15 @@ public class DisplayASCII extends JPanel {
 	}
 
 	public void resetCamera() {
-		this.camera = new Camera(0, 0, 1 / 12.0);
+
+		this.camera = new Camera(
+				(this.getWidth()
+						- (this.img.getWidth() * this.img.getFontSize() / 12.0))
+						/ 2,
+				(this.getHeight()
+						- (this.img.getHeight() * this.img.getFontSize() / 12.0))
+						/ 2,
+				1 / 12.0);
 	}
 
 }

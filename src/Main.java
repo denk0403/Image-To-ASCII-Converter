@@ -9,8 +9,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		JFileChooser filechooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", ".jpg",
-				".png");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg",
+				"png");
 		filechooser.setFileFilter(filter);
 		int result = filechooser.showDialog(null, "Open");
 		if (result == JFileChooser.APPROVE_OPTION) {
