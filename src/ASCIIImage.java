@@ -12,9 +12,19 @@ public class ASCIIImage implements ImageObserver {
 
 	BufferedImage img;
 	ArrayList<String> conversion;
+	private int width = 1500;
+	private int height = 900;
 
 	public ASCIIImage(BufferedImage img) {
 		this.img = img;
+		this.conversion = new ArrayList<>();
+		this.convert();
+	}
+	
+	public ASCIIImage(BufferedImage img, int width, int height) {
+		this.img = img;
+		this.width = width;
+		this.height = height;
 		this.conversion = new ArrayList<>();
 		this.convert();
 	}
@@ -46,15 +56,15 @@ public class ASCIIImage implements ImageObserver {
 	private void resizeIfNecessary() {
 		BufferedImage newImg = new BufferedImage(this.img.getWidth(), this.img.getHeight(),
 				this.img.getType());
-		if (newImg.getWidth() > 1500 || newImg.getHeight() > 900) {
-			if (newImg.getWidth() > 1500) {
-				newImg = new BufferedImage(1500,
-						(int) (newImg.getHeight() / (newImg.getWidth() / 1500.0)),
+		if (newImg.getWidth() > this.width || newImg.getHeight() > this.height) {
+			if (newImg.getWidth() > this.width) {
+				newImg = new BufferedImage(this.width,
+						(int) (newImg.getHeight() / (newImg.getWidth() / (double)this.width)),
 						this.img.getType());
 			}
-			if (newImg.getHeight() > 900) {
-				newImg = new BufferedImage((int) (newImg.getWidth() / (newImg.getHeight() / 900.0)),
-						900, this.img.getType());
+			if (newImg.getHeight() > this.height) {
+				newImg = new BufferedImage((int) (newImg.getWidth() / (newImg.getHeight() / this.height)),
+						this.height, this.img.getType());
 			}
 			Graphics2D g2 = (Graphics2D) newImg.getGraphics();
 			g2.drawImage(this.img, 0, 0, newImg.getWidth(), newImg.getHeight(), null);
@@ -64,7 +74,7 @@ public class ASCIIImage implements ImageObserver {
 	}
 
 	private String getEnergyChar(double brightness) {
-		// map : "MNHQ$OC?7>!:-;. "
+		// map : "NMGHO$C7?>;!:-. "
 		double energy = 255 - brightness;
 		if (energy > 240) {
 			return "N";
